@@ -1,12 +1,16 @@
 #ifndef GAME_TEXTBUTTON_HPP
 #define GAME_TEXTBUTTON_HPP
 
-#include "Button.hpp"
+#include "Interactive.hpp"
 
 namespace GUI {
-	class TextButton : public Button {
+	class TextButton : public Interactive {
 	public:
-	private:
+		explicit TextButton(sf::RectangleShape &&shape) : Interactive(std::move(shape)) {}
+
+		void draw(GameRenderer &renderer) override;
+
+	protected:
 		void onLeftClick() override;
 
 		void onRightClick() override;

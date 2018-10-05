@@ -15,13 +15,15 @@ namespace GUI {
 	public:
 		void addComponent(std::unique_ptr<Component> component);
 
-		void clearComponent();
+		void clear();
 
 		void setOffsetX(unsigned int x);
 
 		void setOffsetY(unsigned int y);
 
 		void draw(GameRenderer &renderer);
+
+		void onEvent(const sf::Event &event);
 
 	};
 

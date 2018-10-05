@@ -4,6 +4,10 @@ void State::MainMenu::onOpen() {
 
 }
 
+void State::MainMenu::onClose() {
+	m_menu.clear();
+}
+
 void State::MainMenu::onTick(int dt) {
 
 }
@@ -17,7 +21,7 @@ void State::MainMenu::draw(GameRenderer &renderer) {
 	rect.setFillColor(sf::Color::Red);
 
 	sf::RectangleShape rect2 = rect;
-	rect2.setPosition(500, 500);
+	rect2.setPosition(300, 300);
 
 	renderer.draw(std::make_unique<sf::RectangleShape>(std::move(rect)));
 	renderer.draw(std::make_unique<sf::RectangleShape>(std::move(rect2)));

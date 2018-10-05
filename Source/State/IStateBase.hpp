@@ -10,7 +10,10 @@ public:
 
 	virtual void onOpen() = 0;
 
+	virtual void onClose() = 0;
+
 	virtual void onTick(int dt) = 0; //TODO IMPLEMENT METHOD TO GAME LOOP
+
 	virtual void onEvent(const sf::Event &e) = 0;
 
 	virtual void draw(GameRenderer &renderer) = 0;

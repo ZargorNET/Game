@@ -8,6 +8,8 @@ namespace GUI {
 	class Component {
 	private:
 		float m_width, m_height;
+	protected:
+		bool isMouseOver(const sf::Shape &shape) const;
 	public:
 		Component(float width, float height) : m_width(width), m_height(height) {}
 

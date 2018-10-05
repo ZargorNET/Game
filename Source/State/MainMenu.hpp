@@ -2,6 +2,7 @@
 #define GAME_MAINMENUSTATE_HPP
 
 #include "IStateBase.hpp"
+#include "../Gui/Menu.hpp"
 
 
 class GameRenderer;
@@ -9,9 +10,12 @@ class GameRenderer;
 namespace State {
 	class MainMenu : public IStateBase {
 	private:
+		GUI::Menu m_menu;
 	public:
 
 		void onOpen() override;
+
+		void onClose() override;
 
 		void onTick(int dt) override;
 

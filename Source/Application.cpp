@@ -20,6 +20,8 @@ GameRenderer &Application::getGameRenderer() {
 
 IStateBase *Application::getCurrenState() {
 	if (m_replaceState) {
+		if (m_state)
+			m_state->onClose();
 		m_state = std::move(m_replaceState);
 		m_state->onOpen();
 	}
