@@ -1,4 +1,4 @@
-#include <utility>
+
 
 #include "TextButton.hpp"
 
@@ -6,17 +6,6 @@
 
 }*/
 void GUI::TextButton::draw(GameRenderer &renderer) {
-	renderer.draw(std::make_unique<sf::RectangleShape>(m_shape));
-}
-
-void GUI::TextButton::onLeftClick() {
-	std::cout << "LEFT\n";
-}
-
-void GUI::TextButton::onRightClick() {
-	std::cout << "RIGHT\n";
-}
-
-void GUI::TextButton::onHover() {
-
+	renderer.draw(m_shape);
+	renderer.draw(m_text);
 }

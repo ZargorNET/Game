@@ -6,16 +6,19 @@
 namespace GUI {
 	class TextButton : public Interactive {
 	public:
-		explicit TextButton(sf::RectangleShape &&shape) : Interactive(std::move(shape)) {}
+		explicit TextButton(sf::RectangleShape &&shape, sf::Text &&text) : Interactive(std::move(shape)),
+		                                                                   m_text(std::move(text)) {
+			const sf::FloatRect textBound(m_text.getGlobalBounds());
+			const sf::FloatRect shapeBound(m_shape.getGlobalBounds());
+			m_text.setPosition(shapeBound.left + (shapeBound.width / 2) - (textBound.width / 2),
+			                   shapeBound.top + (shapeBound.height / 2) - textBound.height);
+		}
 
 		void draw(GameRenderer &renderer) override;
 
+
 	protected:
-		void onLeftClick() override;
-
-		void onRightClick() override;
-
-		void onHover() override;
+		sf::Text m_text;
 	};
 }
 
