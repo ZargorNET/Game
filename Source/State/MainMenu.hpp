@@ -13,6 +13,8 @@ namespace State {
 		GUI::Menu m_menu;
 	public:
 
+		MainMenu(GUI::Menu &&menu) : m_menu(std::move(menu)) {}
+
 		void onOpen() override;
 
 		void onClose() override;

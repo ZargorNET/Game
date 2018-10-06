@@ -2,14 +2,14 @@
 #define GAME_GAMERENDERER_HPP
 
 #include <list>
-#include <SFML/Graphics.hpp>
 #include <memory>
+#include <SFML/Graphics.hpp>
 
 class GameRenderer {
 private:
-	std::list<std::unique_ptr<sf::Drawable>> m_toDraw;
+	std::list<sf::Drawable *> m_toDraw;
 public:
-	void draw(std::unique_ptr<sf::Drawable> drawable);
+	void draw(sf::Drawable &drawable);
 
 	void update();
 };

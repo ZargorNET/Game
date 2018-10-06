@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include <memory>
 #include "GameWindow.hpp"
 #include "State/MainMenu.hpp"
 #include "Application.hpp"
@@ -11,23 +12,31 @@ int main() {
 	sf::Clock clock;
 	GameWindow &mainWindow = Application::getInstance().getGameWindow();
 	GameRenderer &renderer = Application::getInstance().getGameRenderer();
-	Application::getInstance().setState(std::make_unique<State::MainMenu>());
 
-	GUI::Menu menu;
+	auto fontHolder = ResourceHolder<sf::Font>("Res/", ".ttf", false);
+	auto textureHolder = ResourceHolder<sf::Texture>("Res/", ".png");
+	auto soundHolder = ResourceHolder<sf::SoundBuffer>("Res/", ".ogg", false);
 
-	auto a = ResourceHolder<sf::Font>("Res/", ".ttf", false);
-	auto b = ResourceHolder<sf::Texture>("Res/", ".png");
-	auto c = ResourceHolder<sf::SoundBuffer>("Res/", ".ogg", false);
-	ResourceManager resoureManager(std::move(a),
-	                               std::move(b),
-	                               std::move(c));
+	ResourceManager resoureManager(std::move(fontHolder),
+	                               std::move(textureHolder),
+	                               std::move(soundHolder));
+
 
 	{
-		sf::RectangleShape buttonShape({600.f, 600.f});
+		GUI::Menu menu;
+		sf::RectangleShape buttonShape({300.f, 100.f});
 		buttonShape.setOutlineColor(sf::Color::Green);
+		buttonShape.setFillColor(sf::Color::Black);
 		buttonShape.setOutlineThickness(2.f);
-		buttonShape.setTexture(&resoureManager.getTexture("Download"));
-		menu.addComponent(std::make_unique<GUI::TextButton>(std::move(buttonShape)));
+		buttonShape.setPosition(400.f, 400.f);
+
+		GUI::TextButton textButton(std::move(buttonShape),
+		                           sf::Text("Hello world", resoureManager.getFont("Roboto-Black")));
+		textButton.setLeftClickCallback([]() {
+			std::cout << "HOVVV\n";
+		});
+		menu.addComponent(std::make_unique<GUI::TextButton>(std::move(textButton)));
+		Application::getInstance().setState(std::make_unique<State::MainMenu>(std::move(menu)));
 	}
 
 
@@ -39,7 +48,7 @@ int main() {
 
 		IStateBase *state = Application::getInstance().getCurrenState();
 		if (!state)
-			throw std::runtime_error("Current state is a nullptr!");
+			throw std::runtime_error("Current state is fontHolder nullptr!");
 
 		sf::Event event{};
 		while (mainWindow.getRaw().pollEvent(event)) {
@@ -48,12 +57,9 @@ int main() {
 				break;
 			}
 			state->onEvent(event);
-			menu.onEvent(event);
 		}
 		mainWindow.clear(sf::Color::Black);
 		state->draw(renderer);
-		menu.draw(renderer);
-		//	mainWindow.draw(buttonShape);
 
 		renderer.update();
 		mainWindow.update();
