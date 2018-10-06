@@ -6,7 +6,7 @@ Application &Application::getInstance() {
 	return app;
 }
 
-Application::Application() : m_window(GameWindow{"Game", Dimension(1080, 720)}) {
+Application::Application() : m_window(GameWindow{"Game", Dimension(500, 500)}) {
 
 }
 

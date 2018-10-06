@@ -3,7 +3,7 @@
 #include "Interactive.hpp"
 
 void GUI::Interactive::onEvent(const sf::Event &event) {
-	if (Component::isMouseOver(m_shape)) {
+	if (Component::isMouseOver(getShape())) {
 		m_onHover();
 		if (event.type == sf::Event::MouseButtonPressed) {
 			if (event.mouseButton.button == sf::Mouse::Button::Left)

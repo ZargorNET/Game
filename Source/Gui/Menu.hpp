@@ -4,27 +4,24 @@
 #include <vector>
 #include <memory>
 #include "Component.hpp"
+#include "Background.hpp"
 
 namespace GUI {
 	class Menu {
-	private:
+	protected:
 		std::vector<std::unique_ptr<Component>> m_components;
-		unsigned int m_offsetX = 0;
-		unsigned int m_offsetY = 0;
+		std::unique_ptr<GUI::Background> m_background;
 
 	public:
-		void addComponent(std::unique_ptr<Component> component);
+		virtual void addComponent(std::unique_ptr<Component> component);
 
 		void clear();
-
-		void setOffsetX(unsigned int x);
-
-		void setOffsetY(unsigned int y);
 
 		void draw(GameRenderer &renderer);
 
 		void onEvent(const sf::Event &event);
 
+		void setBackground(const sf::Texture &text);
 	};
 
 }

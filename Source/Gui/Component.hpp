@@ -10,12 +10,14 @@ namespace GUI {
 	 */
 	class Component {
 	private:
-		float m_width, m_height;
+		sf::RectangleShape m_shape;
 	protected:
 		bool isMouseOver(const sf::Shape &shape) const;
 
 	public:
-		Component(float width, float height) : m_width(width), m_height(height) {}
+		explicit Component(sf::RectangleShape &&shape) : m_shape(std::move(shape)) {}
+
+		explicit Component(sf::RectangleShape &shape) : m_shape(shape) {}
 
 		virtual ~Component() = default;
 
@@ -30,6 +32,14 @@ namespace GUI {
 		 * @param event Any event (not specific to the component)
 		 */
 		virtual void onEvent(const sf::Event &event) = 0;
+
+		virtual void setPosition(const sf::Vector2f &vector) {
+			m_shape.setPosition(vector);
+		}
+
+		sf::RectangleShape &getShape() {
+			return m_shape;
+		}
 	};
 }
 

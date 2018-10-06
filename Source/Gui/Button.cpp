@@ -6,6 +6,6 @@
 
 }*/
 void GUI::Button::draw(GameRenderer &renderer) {
-	renderer.draw(m_shape);
-	renderer.draw(m_text);
+	renderer.draw(Interactive::getShape());
+	renderer.draw(TextLabel::m_text);
 }

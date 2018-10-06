@@ -9,13 +9,11 @@ namespace GUI {
 	/**
 	 * Base class for components which shall be clickable/hoverable
 	 */
-	class Interactive : public Component {
-	protected:
-		sf::RectangleShape m_shape;
-
+	class Interactive : public virtual Component {
 	public:
-		explicit Interactive(sf::RectangleShape &&shape) : Component(shape.getSize().x, shape.getSize().y),
-		                                                   m_shape(std::move(shape)) {}
+		explicit Interactive(sf::RectangleShape &&shape) : Component(std::move(shape)) {}
+
+		explicit Interactive(sf::RectangleShape &shape) : Component(shape) {}
 
 		void onEvent(const sf::Event &event) override;
 
