@@ -1,4 +1,4 @@
-#include <c++/8.2.0/iostream>
+#include <iostream>
 #include "Application.hpp"
 
 Application &Application::getInstance() {
