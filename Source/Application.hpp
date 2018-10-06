@@ -7,6 +7,9 @@
 #include "GameRenderer.hpp"
 #include "State/IStateBase.hpp"
 
+/**
+ * This class represents the Application itself
+ */
 class Application : public Singleton {
 private:
 	Application();
@@ -17,14 +20,30 @@ private:
 	std::unique_ptr<IStateBase> m_replaceState;
 
 public:
+	/**
+	 * @returns This (static)
+	 */
 	static Application &getInstance();
 
+	/**
+	 * @returns The main OS window
+	 */
 	GameWindow &getGameWindow();
 
+	/**
+	 * @returns The main game renderer
+	 */
 	GameRenderer &getGameRenderer();
 
-	IStateBase *getCurrenState();
+	/**
+	 * @returns The current scene(state) as a pointer
+	 * @warning Can be null!
+	 */
+	IStateBase *getCurrentState();
 
+	/**
+	 * Replaces the state in the next frame
+	 */
 	void setState(std::unique_ptr<IStateBase> state);
 };
 

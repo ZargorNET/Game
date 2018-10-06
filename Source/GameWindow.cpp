@@ -1,11 +1,11 @@
 #include "GameWindow.hpp"
 #include <utility>
 
-GameWindow::GameWindow(std::string title, Dimension size, WindowType windowType, unsigned int framelimit)
+GameWindow::GameWindow(std::string title, Dimension size, WindowType windowType, unsigned int frameLimit)
 		: m_title(std::move(title)),
 		  m_size(size),
 		  m_windowType(windowType),
-		  m_framelimit(framelimit) {
+		  m_frameLimit(frameLimit) {
 
 	m_ContextSettings.depthBits = 24;
 	m_ContextSettings.stencilBits = 8;
@@ -29,9 +29,9 @@ void GameWindow::setTitle(std::string title) {
 	this->getRaw().setTitle(m_title);
 }
 
-void GameWindow::setFramelimit(unsigned int framelimit) {
-	m_framelimit = framelimit;
-	this->getRaw().setFramerateLimit(m_framelimit);
+void GameWindow::setFrameLimit(unsigned int frameLimit) {
+	m_frameLimit = frameLimit;
+	this->getRaw().setFramerateLimit(m_frameLimit);
 }
 
 void GameWindow::setSize(Dimension size) {
@@ -78,6 +78,6 @@ void GameWindow::open() {
 	m_raw.create(sf::VideoMode(m_size.m_width,
 	                           m_size.m_height),
 	             m_title, flags, m_ContextSettings);
-	m_raw.setFramerateLimit(this->getFramelimit());
+	m_raw.setFramerateLimit(this->getFrameLimit());
 }
 

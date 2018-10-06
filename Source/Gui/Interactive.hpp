@@ -6,6 +6,9 @@
 #include <functional>
 
 namespace GUI {
+	/**
+	 * Base class for components which shall be clickable/hoverable
+	 */
 	class Interactive : public Component {
 	protected:
 		sf::RectangleShape m_shape;

@@ -4,7 +4,7 @@
 #include "GameWindow.hpp"
 #include "State/MainMenu.hpp"
 #include "Application.hpp"
-#include "Gui/TextButton.hpp"
+#include "Gui/Button.hpp"
 #include "Resource/ResourceManager.hpp"
 
 
@@ -18,9 +18,9 @@ int main() {
 	auto textureHolder = ResourceHolder<sf::Texture>("Res/", ".png");
 	auto soundHolder = ResourceHolder<sf::SoundBuffer>("Res/", ".ogg", false);
 
-	ResourceManager resoureManager(std::move(fontHolder),
-	                               std::move(textureHolder),
-	                               std::move(soundHolder));
+	ResourceManager resourceManager(std::move(fontHolder),
+	                                std::move(textureHolder),
+	                                std::move(soundHolder));
 
 
 	{
@@ -31,12 +31,12 @@ int main() {
 		buttonShape.setOutlineThickness(2.f);
 		buttonShape.setPosition(400.f, 400.f);
 
-		GUI::TextButton textButton(std::move(buttonShape),
-		                           sf::Text("Hello world", resoureManager.getFont("Roboto-Black")));
+		GUI::Button textButton(std::move(buttonShape),
+		                       sf::Text("Hello world", resourceManager.getFont("Roboto-Black")));
 		textButton.setLeftClickCallback([]() {
 			std::cout << "HOVVV\n";
 		});
-		menu.addComponent(std::make_unique<GUI::TextButton>(std::move(textButton)));
+		menu.addComponent(std::make_unique<GUI::Button>(std::move(textButton)));
 		Application::getInstance().setState(std::make_unique<State::MainMenu>(std::move(menu)));
 	}
 
@@ -47,7 +47,7 @@ int main() {
 
 		mainWindow.setTitle("My Game [FPS: " + std::to_string(fps) + "]");
 
-		IStateBase *state = Application::getInstance().getCurrenState();
+		IStateBase *state = Application::getInstance().getCurrentState();
 		if (!state)
 			throw std::runtime_error("Current state is fontHolder nullptr!");
 

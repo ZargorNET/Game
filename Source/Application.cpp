@@ -18,7 +18,7 @@ GameRenderer &Application::getGameRenderer() {
 	return m_renderer;
 }
 
-IStateBase *Application::getCurrenState() {
+IStateBase *Application::getCurrentState() {
 	if (m_replaceState) {
 		if (m_state)
 			m_state->onClose();

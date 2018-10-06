@@ -4,10 +4,13 @@
 #include "Interactive.hpp"
 
 namespace GUI {
-	class TextButton : public Interactive {
+	/**
+	 * Represents a simple button with text in it
+	 */
+	class Button : public Interactive {
 	public:
-		explicit TextButton(sf::RectangleShape &&shape, sf::Text &&text) : Interactive(std::move(shape)),
-		                                                                   m_text(std::move(text)) {
+		explicit Button(sf::RectangleShape &&shape, sf::Text &&text) : Interactive(std::move(shape)),
+		                                                               m_text(std::move(text)) {
 			const sf::FloatRect textBound(m_text.getGlobalBounds());
 			const sf::FloatRect shapeBound(m_shape.getGlobalBounds());
 			m_text.setPosition(shapeBound.left + (shapeBound.width / 2) - (textBound.width / 2),
