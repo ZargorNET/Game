@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <memory>
+#include <iostream>
 #include "GameWindow.hpp"
 #include "State/MainMenu.hpp"
 #include "Application.hpp"
